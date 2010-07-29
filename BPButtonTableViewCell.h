@@ -10,12 +10,12 @@
 
 
 @interface BPButtonTableViewCell : UITableViewCell {
-	id target;
-	SEL action;
+    UIButton *button;
 }
 
 - (id)initWithLabelText:(NSString *)labelText target:(id)aTarget action:(SEL)anAction;
 
-- (void)setTarget:(id)aTarget action:(SEL)anAction;
+- (void)addTarget:(id)aTarget action:(SEL)anAction forControlEvents:(UIControlEvents)controlEvents;
+- (void)removeTarget:(id)aTarget action:(SEL)anAction forControlEvents:(UIControlEvents)controlEvents;
 
 @end

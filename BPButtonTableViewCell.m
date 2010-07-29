@@ -17,16 +17,18 @@
 		self.selectionStyle = UITableViewCellSelectionStyleNone;
 		
 		// Set text properties
-		self.textLabel.textAlignment = UITextAlignmentCenter;
-		self.textLabel.textColor = [UIColor whiteColor];
-		self.textLabel.font = [UIFont boldSystemFontOfSize:20.0];
-		self.textLabel.shadowOffset = CGSizeMake(0, -1);
-		self.textLabel.shadowColor = [UIColor colorWithWhite:0 alpha:0.5];
-		
-		// Set button background image (which is, for now, 
 		UIImage *image = [[UIImage imageNamed:@"redButton.png"] stretchableImageWithLeftCapWidth:6.0 topCapHeight:0.0];
+
+		button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.titleLabel.textColor = [UIColor whiteColor];
+        button.titleLabel.font = [UIFont boldSystemFontOfSize:20.0];
+        button.titleLabel.shadowColor = [UIColor colorWithWhite:0 alpha:0.5];
+        button.titleLabel.shadowOffset = CGSizeMake(0, -1);
+        [button setBackgroundImage:image forState:UIControlStateNormal];
+        
+        [self.contentView addSubview:button];
+        
 		self.backgroundColor = [UIColor clearColor];
-		self.backgroundView = [[UIImageView alloc] initWithImage:image];
     }
 	
     return self;
@@ -34,31 +36,24 @@
 
 - (id)initWithLabelText:(NSString *)labelText target:(id)aTarget action:(SEL)anAction {
 	if (self = [self init]) {
-		self.textLabel.text = labelText;
-		[self setTarget:aTarget action:anAction];
+        [button setTitle:labelText forState:UIControlStateNormal];
+        [self addTarget:aTarget action:anAction forControlEvents:UIControlEventTouchUpInside];
 	}
 	
 	return self;
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-	[super setSelected:selected animated:animated];
-	
-	if (selected)
-		[target performSelector:action withObject:self];
+- (void)addTarget:(id)aTarget action:(SEL)anAction forControlEvents:(UIControlEvents)controlEvents {
+    [button addTarget:aTarget action:anAction forControlEvents:controlEvents];
 }
 
-- (void)setTarget:(id)aTarget action:(SEL)anAction {
-	if (target != aTarget) {
-		[target release];
-		target = [aTarget retain];		
-	}
-	action = anAction;
+- (void)removeTarget:(id)aTarget action:(SEL)anAction forControlEvents:(UIControlEvents)controlEvents {
+    [button removeTarget:aTarget action:anAction forControlEvents:controlEvents];
 }
 
-- (void)dealloc {
-	[target release];
-	[super dealloc];
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    button.frame = CGRectInset(self.contentView.bounds, 0, -2);
 }
 
 @end
