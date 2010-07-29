@@ -1,6 +1,5 @@
 //
 //  BPButtonTableViewCell.m
-//  Brewtool
 //
 //  Created by Jon Olson on 9/24/09.
 //  Copyright 2009 Ballistic Pigeon, LLC. All rights reserved.
@@ -10,6 +9,9 @@
 
 
 @implementation BPButtonTableViewCell
+
+#pragma mark -
+#pragma mark Initialization
 
 - (id)init {
     if (self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil]) {
@@ -43,6 +45,14 @@
 	return self;
 }
 
+#pragma mark -
+#pragma mark Accessors
+
+@synthesize button;
+
+#pragma mark -
+#pragma mark UIControl convenience passthroughs
+
 - (void)addTarget:(id)aTarget action:(SEL)anAction forControlEvents:(UIControlEvents)controlEvents {
     [button addTarget:aTarget action:anAction forControlEvents:controlEvents];
 }
@@ -50,6 +60,9 @@
 - (void)removeTarget:(id)aTarget action:(SEL)anAction forControlEvents:(UIControlEvents)controlEvents {
     [button removeTarget:aTarget action:anAction forControlEvents:controlEvents];
 }
+
+#pragma mark -
+#pragma mark Keep our button right where it belongs
 
 - (void)layoutSubviews {
     [super layoutSubviews];

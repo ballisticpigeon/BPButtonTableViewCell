@@ -1,6 +1,5 @@
 //
 //  BPButtonTableViewCell.h
-//  Brewtool
 //
 //  Created by Jon Olson on 9/24/09.
 //  Copyright 2009 Ballistic Pigeon, LLC. All rights reserved.
@@ -12,6 +11,8 @@
 @interface BPButtonTableViewCell : UITableViewCell {
     UIButton *button;
 }
+
+@property (readonly) UIButton *button;
 
 - (id)initWithLabelText:(NSString *)labelText target:(id)aTarget action:(SEL)anAction;
 
